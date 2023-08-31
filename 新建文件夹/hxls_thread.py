@@ -14,56 +14,56 @@ class Thready(QThread):
     def run(self):
         print(self.tlist)
         self.hxls_start()
-        self.testsignal.emit("ÓÎÏ·ÒÑÆô¶¯¡£")
-        self.testsignal.emit("(×Ô¶¯´¥·¢¼İÊ»²ÕÉáÓÑ»¥¶¯)")
+        self.testsignal.emit("æ¸¸æˆå·²å¯åŠ¨ã€‚")
+        self.testsignal.emit("(è‡ªåŠ¨è§¦å‘é©¾é©¶èˆ±èˆå‹äº’åŠ¨)")
         click(769,590)
         wait(300)
         if self.tlist[1][1]:
             self.fight()
-            self.testsignal.emit("¼ì²éÍê³É£º×÷Õ½¡£")
+            self.testsignal.emit("æ£€æŸ¥å®Œæˆï¼šä½œæˆ˜ã€‚")
         if self.tlist[1][2]:
             self.dispatch()
-            self.testsignal.emit("¼ì²éÍê³É£ºÏßÏÂ²É¹º¡£")
+            self.testsignal.emit("æ£€æŸ¥å®Œæˆï¼šçº¿ä¸‹é‡‡è´­ã€‚")
         if self.tlist[1][3]:
             self.review()
-            self.testsignal.emit("¼ì²éÍê³É£ºÕ½Êõ»Ø¹Ë¡£")
+            self.testsignal.emit("æ£€æŸ¥å®Œæˆï¼šæˆ˜æœ¯å›é¡¾ã€‚")
         if self.tlist[1][4]:
             self.getmarket()
-            self.testsignal.emit("¼ì²éÍê³É£º¼¯ÊĞÁìÈ¡¡£")
+            self.testsignal.emit("æ£€æŸ¥å®Œæˆï¼šé›†å¸‚é¢†å–ã€‚")
         if self.tlist[1][5]:
             self.recruit()
-            self.testsignal.emit("¼ì²éÍê³É£ºÉáÓÑ·ÃÄ¼¡£")
+            self.testsignal.emit("æ£€æŸ¥å®Œæˆï¼šèˆå‹è®¿å‹Ÿã€‚")
         if self.tlist[1][6]:
             self.reward()
-            self.testsignal.emit("¼ì²éÍê³É£º½ñÈÕ¹¤×÷¡£")
+            self.testsignal.emit("æ£€æŸ¥å®Œæˆï¼šä»Šæ—¥å·¥ä½œã€‚")
         if self.tlist[1][7]:
             self.random_gift()
-            self.testsignal.emit("¼ì²éÍê³É£ºËæ»úÀñ°ü¡£")
-        self.testsignal.emit("Ö´ĞĞÍê³É¡£\n")
+            self.testsignal.emit("æ£€æŸ¥å®Œæˆï¼šéšæœºç¤¼åŒ…ã€‚")
+        self.testsignal.emit("æ‰§è¡Œå®Œæˆã€‚\n")
         if self.tlist[1][8]:
-            self.testsignal.emit("³¢ÊÔ¹Ø±ÕÓÎÏ·¡£")
+            self.testsignal.emit("å°è¯•å…³é—­æ¸¸æˆã€‚")
             killgame(self.tlist[0])
         self.accomplish.emit(1)
 
     def hxls_start(self):
-        imi = imitate("UnityWndClass", "»·ĞĞÂÃÉá",path = "D:\Program Files (x86)\hxls\»·ĞĞÂÃÉá.exe")
+        imi = imitate("UnityWndClass", "ç¯è¡Œæ—…èˆ",path = "D:\Program Files (x86)\hxls\ç¯è¡Œæ—…èˆ.exe")
         for fun in dir(imitate)[26:]:
             globals()[fun] = eval("imi." + fun)
-        self.testsignal.emit("¿ªÊ¼Ê¶±ğÓÎÏ·×´Ì¬¡£")
+        self.testsignal.emit("å¼€å§‹è¯†åˆ«æ¸¸æˆçŠ¶æ€ã€‚")
         i = 1
         while 1:
             if i==1:
                 if findpic((871, 612, 1052, 654), r"hxls_resource\picture\startgame.png")[1] >= 0.6:
                     wait(500)
                     click(930, 630)
-                    self.testsignal.emit("µÇÂ¼ÓÎÏ·¡£")
+                    self.testsignal.emit("ç™»å½•æ¸¸æˆã€‚")
                     wait(5000)
                     i=2
-            if findpic((887, 240, 1032, 280), r"hxls_resource\picture\sighin.png")[1] >= 0.6: # Ç©µ½½±Àø
+            if findpic((887, 240, 1032, 280), r"hxls_resource\picture\sighin.png")[1] >= 0.6: # ç­¾åˆ°å¥–åŠ±
                 click(970, 930)
                 wait(1500)
                 click(1789, 120)
-                self.testsignal.emit("Ç©µ½³É¹¦¡£")
+                self.testsignal.emit("ç­¾åˆ°æˆåŠŸã€‚")
                 wait(1000)
                 for num in range(10):
                     (x, y), sim = findpic((0, 0, 1920, 1080), r"hxls_resource\picture\close\close1.png")
@@ -72,27 +72,27 @@ class Thready(QThread):
                         wait(1500)
                     else:break
                     wait(800)
-            if findpic((1739, 37, 1814, 98), r"hxls_resource\picture\home.png")[1] >= 0.6:# Ö÷½çÃæ
-                self.testsignal.emit("¼ÓÔØµ½Ö÷½çÃæ¡£")
+            if findpic((1739, 37, 1814, 98), r"hxls_resource\picture\home.png")[1] >= 0.6:# ä¸»ç•Œé¢
+                self.testsignal.emit("åŠ è½½åˆ°ä¸»ç•Œé¢ã€‚")
                 break
             wait(1500)
 
     def fight(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é£º×÷Õ½¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥ï¼šä½œæˆ˜ã€‚")
         val = findpic((1652, 306, 1788, 393), r"hxls_resource\picture\fight\fighting.png")[1]
         if val>=0.6:
-            self.testsignal.emit("ÖØÓÎ½øĞĞÖĞ£¬²»ÄÜÔÙ´Î¿ªÆô×÷Õ½¡£")
+            self.testsignal.emit("é‡æ¸¸è¿›è¡Œä¸­ï¼Œä¸èƒ½å†æ¬¡å¼€å¯ä½œæˆ˜ã€‚")
         elif not findcolor((1784, 382, 1825, 429), "2000FF")[0]:
-            self.testsignal.emit("×÷Õ½¿ÕÏĞÖĞ¡£")
-            if self.tlist[2][0]:self.testsignal.emit("Ã»ÓĞÔÙ´ÎÖØÓÎÄ¿±ê¡£")
+            self.testsignal.emit("ä½œæˆ˜ç©ºé—²ä¸­ã€‚")
+            if self.tlist[2][0]:self.testsignal.emit("æ²¡æœ‰å†æ¬¡é‡æ¸¸ç›®æ ‡ã€‚")
         else:
             click(1739, 420)
-            self.testsignal.emit("ÖØÓÎÍê³É£¬ÁìÈ¡ÖØÓÎ½±Àø¡£")
+            self.testsignal.emit("é‡æ¸¸å®Œæˆï¼Œé¢†å–é‡æ¸¸å¥–åŠ±ã€‚")
             wait(1500)
             while 1:
                 if findpic((1670, 50, 1820, 110), r"hxls_resource\picture\fight\retour.png")[1] >= 0.6:
                     if self.tlist[2][0]:
-                        self.testsignal.emit("³¢ÊÔÖØ¸´ÉÏ´Î×÷Õ½¡£")
+                        self.testsignal.emit("å°è¯•é‡å¤ä¸Šæ¬¡ä½œæˆ˜ã€‚")
                         click(1744, 80)
                         wait(1500)
                         ((x, y), sim) = findpic((1100, 335, 1900, 983), r"hxls_resource\picture\fight\add.png")
@@ -101,18 +101,18 @@ class Thready(QThread):
                             wait(1000)
                             click(x, y + 280)
                             wait(1000)
-                            self.testsignal.emit("¿ªÊ¼ÖØ¸´ÉÏ´Î×÷Õ½¡£")
+                            self.testsignal.emit("å¼€å§‹é‡å¤ä¸Šæ¬¡ä½œæˆ˜ã€‚")
                             click(288, 78)
                             wait(1500)
                         else:
-                            self.testsignal.emit("error:ÖØ¸´ÉÏ´Î×÷Õ½Î´Öª´íÎó¡£")
+                            self.testsignal.emit("error:é‡å¤ä¸Šæ¬¡ä½œæˆ˜æœªçŸ¥é”™è¯¯ã€‚")
                             self.accomplish.emit(3)
                     else:
                         click(971, 930)
                         wait(800)
                     break
                 if findpic((875, 182, 1048, 221), r"hxls_resource\picture\lvup.png")[1] >= 0.6:
-                    self.testsignal.emit("µÈ¼¶ÌáÉı£¡")
+                    self.testsignal.emit("ç­‰çº§æå‡ï¼")
                     click(1282, 690)
                 wait(1000)
         if (not self.tlist[2][0]) and (val==0):
@@ -136,41 +136,41 @@ class Thready(QThread):
             wait(1000)
             click(288, 78)
             wait(1500)
-            self.testsignal.emit("¿ªÊ¼×÷Õ½£º»ñÈ¡ "+["¸ñ","·çÎïÖ¾","½Ú"][num])
+            self.testsignal.emit("å¼€å§‹ä½œæˆ˜ï¼šè·å– "+["æ ¼","é£ç‰©å¿—","èŠ‚"][num])
 
     def dispatch(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é£ºÏßÏÂ²É¹º¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥ï¼šçº¿ä¸‹é‡‡è´­ã€‚")
         click(149, 795)
         wait(1000)
         click(1563, 141)
         wait(1000)
         dlist = []
         for n in range(6):
-            y1, y2 = self.indexdir["ÏßÏÂ²É¹ºÇøÓò"][n]
+            y1, y2 = self.indexdir["çº¿ä¸‹é‡‡è´­åŒºåŸŸ"][n]
             zoom = (1068, y1, 1263, y2)
-            x, y = self.indexdir["ÏßÏÂ²É¹º×ø±ê"][n]
+            x, y = self.indexdir["çº¿ä¸‹é‡‡è´­åæ ‡"][n]
             click(x, y)
             wait(200)
-            if findpic(zoom, r"hxls_resource\picture\dispatch\condition2.png")[1] >= 0.6:  # Íê³ÉÅÉÇ²
+            if findpic(zoom, r"hxls_resource\picture\dispatch\condition2.png")[1] >= 0.6:  # å®Œæˆæ´¾é£
                 dlist+=[n]
-                x, y = self.indexdir["ÏßÏÂ²É¹º×ø±ê"][n]
+                x, y = self.indexdir["çº¿ä¸‹é‡‡è´­åæ ‡"][n]
                 click(x, y)
                 wait(500)
                 click(1708, 977)
                 wait(1200)
                 click(1708, 977)
                 wait(1200)
-                self.testsignal.emit("ÏßÏÂ²É¹º" + str(n + 1) + "£ºÍê³É£¬ÒÑÁìÈ¡¡£")
+                self.testsignal.emit("çº¿ä¸‹é‡‡è´­" + str(n + 1) + "ï¼šå®Œæˆï¼Œå·²é¢†å–ã€‚")
             elif findpic((1632, 927,1796, 1013), r"hxls_resource\picture\dispatch\condition1.png")[1]>=0.6:
-                self.testsignal.emit("ÏßÏÂ²É¹º" + str(n + 1) + "£º½øĞĞÖĞ¡£")
-            elif findpic(zoom, r"hxls_resource\picture\dispatch\condition0.png")[1]>=0.6:#ÅÉÇ²
+                self.testsignal.emit("çº¿ä¸‹é‡‡è´­" + str(n + 1) + "ï¼šè¿›è¡Œä¸­ã€‚")
+            elif findpic(zoom, r"hxls_resource\picture\dispatch\condition0.png")[1]>=0.6:#æ´¾é£
                 dlist += [n]
-                self.testsignal.emit("ÏßÏÂ²É¹º" + str(n + 1) + "£º´ıÅÉÇ²¡£")
+                self.testsignal.emit("çº¿ä¸‹é‡‡è´­" + str(n + 1) + "ï¼šå¾…æ´¾é£ã€‚")
         for n in dlist:
-            self.testsignal.emit("ÏßÏÂ²É¹º" + str(n + 1) + "£º³¢ÊÔ¿ªÊ¼ÅÉÇ²¡£")
-            y1,y2 = self.indexdir["ÏßÏÂ²É¹ºÇøÓò"][n]
+            self.testsignal.emit("çº¿ä¸‹é‡‡è´­" + str(n + 1) + "ï¼šå°è¯•å¼€å§‹æ´¾é£ã€‚")
+            y1,y2 = self.indexdir["çº¿ä¸‹é‡‡è´­åŒºåŸŸ"][n]
             zoom = (1068, y1, 1263, y2)
-            x,y = self.indexdir["ÏßÏÂ²É¹º×ø±ê"][n]
+            x,y = self.indexdir["çº¿ä¸‹é‡‡è´­åæ ‡"][n]
             click(x,y)
             wait(500)
             click(1562, 939)
@@ -193,31 +193,31 @@ class Thready(QThread):
             if sim >=0.85:
                 click(x, y)
                 wait(500)
-                self.testsignal.emit("ÏßÏÂ²É¹º¿ªÊ¼£º"+self.indexdir["ÏßÏÂ²É¹º²ÄÁÏ"][mnum]+
-                                     "-"+self.indexdir["Ğ¯´ø×Ê½ğ"][fnum]+
-                                     "-"+self.indexdir["²É¹º·½°¸"][pnum])
+                self.testsignal.emit("çº¿ä¸‹é‡‡è´­å¼€å§‹ï¼š"+self.indexdir["çº¿ä¸‹é‡‡è´­ææ–™"][mnum]+
+                                     "-"+self.indexdir["æºå¸¦èµ„é‡‘"][fnum]+
+                                     "-"+self.indexdir["é‡‡è´­æ–¹æ¡ˆ"][pnum])
             else:
-                self.testsignal.emit("²É¹º·½°¸Î´ÕÒµ½Ä¿±ê£¬ÒÑ×Ô¶¯Ñ¡ÔñÒ»ºÅÎ»¡£")
-                self.testsignal.emit("ÏßÏÂ²É¹º¿ªÊ¼£º" + self.indexdir["ÏßÏÂ²É¹º²ÄÁÏ"][mnum] +
-                                     "-" + self.indexdir["Ğ¯´ø×Ê½ğ"][fnum])
+                self.testsignal.emit("é‡‡è´­æ–¹æ¡ˆæœªæ‰¾åˆ°ç›®æ ‡ï¼Œå·²è‡ªåŠ¨é€‰æ‹©ä¸€å·ä½ã€‚")
+                self.testsignal.emit("çº¿ä¸‹é‡‡è´­å¼€å§‹ï¼š" + self.indexdir["çº¿ä¸‹é‡‡è´­ææ–™"][mnum] +
+                                     "-" + self.indexdir["æºå¸¦èµ„é‡‘"][fnum])
                 click(143,151)
                 wait(500)
             click(397, 1008)
             wait(1500)
-        # ½áÊø
+        # ç»“æŸ
         click(296, 75)
         wait(1000)
 
     def review(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é£ºÕ½Êõ»Ø¹Ë¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥ï¼šæˆ˜æœ¯å›é¡¾ã€‚")
         if findcolor((1631,876,1708,958), "2000FF",5)[0]:
-            self.testsignal.emit("´æÔÚÕ½Êõ»Ø¹ËÒÑÍê³É¡£")
+            self.testsignal.emit("å­˜åœ¨æˆ˜æœ¯å›é¡¾å·²å®Œæˆã€‚")
             click(1628, 946)
             wait(1000)
             click(258, 386)
             wait(1000)
-            # Õ½ÊõÖ§Ô®
-            self.testsignal.emit("¿ªÊ¼Õ½ÊõÖ§Ô®¡£")
+            # æˆ˜æœ¯æ”¯æ´
+            self.testsignal.emit("å¼€å§‹æˆ˜æœ¯æ”¯æ´ã€‚")
             list = [(613, 795),(779, 799),(954, 803),(1132, 795),(1295, 799),(1502, 798),(1666, 798)]
             for num in range(3):
                 for (x,y) in list:
@@ -227,16 +227,16 @@ class Thready(QThread):
                     click(1646, 347)
                     wait(500)
                 if num < 1:wait(8500)
-            self.testsignal.emit("Õ½ÊõÖ§Ô®Íê³É¡£")
-            # Õ½Êõ»Ø¹Ë
-            self.testsignal.emit("¿ªÊ¼¼ì²éÕ½Êõ»Ø¹Ë¡£")
+            self.testsignal.emit("æˆ˜æœ¯æ”¯æ´å®Œæˆã€‚")
+            # æˆ˜æœ¯å›é¡¾
+            self.testsignal.emit("å¼€å§‹æ£€æŸ¥æˆ˜æœ¯å›é¡¾ã€‚")
             click(293, 277)
             wait(500)
             list = [(575, 820, 825, 868,1),(1003, 821, 1252, 867,2),(1430, 822, 1680, 867,3)]
             for (x1,y1,x2,y2,n) in list:
                 (x,y),val = findpic((x1,y1,x2,y2), r"hxls_resource\picture\review\reviewed.png")
-                if val >= 0.6:#Íê³É»Ø¹Ë
-                    self.testsignal.emit("Õ½Êõ»Ø¹Ë%s£ºÒÑÍê³É¡£"%(n))
+                if val >= 0.6:#å®Œæˆå›é¡¾
+                    self.testsignal.emit("æˆ˜æœ¯å›é¡¾%sï¼šå·²å®Œæˆã€‚"%(n))
                     click(x,y)
                     wait(1000)
                     click(1648, 858)
@@ -245,19 +245,19 @@ class Thready(QThread):
                     wait(1500)
                 else:
                     (x,y),val = findpic((x1,y1,x2,y2), r"hxls_resource\picture\review\toreview.png")
-                    if val >= 0.6:#¿ªÊ¼»Ø¹Ë
-                        self.testsignal.emit("Õ½Êõ»Ø¹Ë%s£º¿ÕÏĞ¡£"%(n))
+                    if val >= 0.6:#å¼€å§‹å›é¡¾
+                        self.testsignal.emit("æˆ˜æœ¯å›é¡¾%sï¼šç©ºé—²ã€‚"%(n))
                     else:
-                        self.testsignal.emit("Õ½Êõ»Ø¹Ë%s£º½øĞĞÖĞ¡£" % (n))
+                        self.testsignal.emit("æˆ˜æœ¯å›é¡¾%sï¼šè¿›è¡Œä¸­ã€‚" % (n))
                 if val >= 0.6:
-                    self.testsignal.emit("³¢ÊÔ´´½¨Õ½Êõ»Ø¹Ë¡£")
+                    self.testsignal.emit("å°è¯•åˆ›å»ºæˆ˜æœ¯å›é¡¾ã€‚")
                     click(x,y)
                     wait(1000)
                     click(734, 846)
                     wait(500)
                     if self.tlist[4] !="0%":
                         while 1 :
-                            rvpath = "hxls_resource\picture\\review\su"+self.indexdir["Õ½Êõ»Ø¹ËÑ¡Ôñ"][self.tlist[4]][:-1]+".png"
+                            rvpath = "hxls_resource\picture\\review\su"+self.indexdir["æˆ˜æœ¯å›é¡¾é€‰æ‹©"][self.tlist[4]][:-1]+".png"
                             (x,y),val = findpic((698, 131, 756, 934), rvpath)
                             if val >= 0.75:
                                 click(x,y)
@@ -269,19 +269,19 @@ class Thready(QThread):
                     click(524, 1007)
                     wait(1000)
                     click(1652, 875)
-                    self.testsignal.emit("Õ½Êõ»Ø¹Ë¿ªÊ¼¡£")
+                    self.testsignal.emit("æˆ˜æœ¯å›é¡¾å¼€å§‹ã€‚")
                     wait(1500)
-            # ½áÊø
+            # ç»“æŸ
             click(296, 75)
             wait(1000)
         else:
-            self.testsignal.emit("ÔİÎŞÕ½Êõ»Ø¹ËÍê³É¡£")
+            self.testsignal.emit("æš‚æ— æˆ˜æœ¯å›é¡¾å®Œæˆã€‚")
             wait(500)
 
     def getmarket(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é£º¼¯ÊĞÁìÈ¡¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥ï¼šé›†å¸‚é¢†å–ã€‚")
         if not findcolor((304, 300, 377, 369), "2000FF", 5)[0]:
-            self.testsignal.emit("¼¯ÊĞÔİÎŞ¿ÉÁìÈ¡¡£")
+            self.testsignal.emit("é›†å¸‚æš‚æ— å¯é¢†å–ã€‚")
         else:
             click(300, 383)
             wait(1000)
@@ -293,27 +293,27 @@ class Thready(QThread):
                     wait(1200)
                     click(1257,723)
                     wait(1200)
-                    self.testsignal.emit("ÁìÈ¡Ã¿ÈÕÅä¸øÍê³É¡£")
+                    self.testsignal.emit("é¢†å–æ¯æ—¥é…ç»™å®Œæˆã€‚")
                     click(1054,837)
                     wait(1200)
-                else:self.testsignal.emit("ÔİÎŞÃ¿ÈÕÅä¸ø¿ÉÁìÈ¡¡£")
+                else:self.testsignal.emit("æš‚æ— æ¯æ—¥é…ç»™å¯é¢†å–ã€‚")
             else:
-                self.testsignal.emit("ÔİÎŞÃ¿ÈÕÅä¸ø¿ÉÁìÈ¡¡£")
+                self.testsignal.emit("æš‚æ— æ¯æ—¥é…ç»™å¯é¢†å–ã€‚")
             if findcolor((270, 538, 355, 613), "2000FF")[0]:
                 click(214, 598)
                 wait(1000)
                 click(1516, 50)
                 wait(2000)
-                self.testsignal.emit("ÁìÈ¡Ô®ÍâĞ­ÒéÍê³É¡£")
+                self.testsignal.emit("é¢†å–æ´å¤–åè®®å®Œæˆã€‚")
                 click(1010, 712)
                 wait(2000)
             else:
-                self.testsignal.emit("ÔİÎŞÔ®ÍâĞ­Òé¿ÉÁìÈ¡¡£")
+                self.testsignal.emit("æš‚æ— æ´å¤–åè®®å¯é¢†å–ã€‚")
             click(299, 77)
             wait(1000)
 
     def recruit(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é:ÉáÓÑ·ÃÄ¼¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥:èˆå‹è®¿å‹Ÿã€‚")
         click(1469,697)
         wait(2000)
         tzone = [(171, 234,379, 338),(174, 346,378, 445),(172, 455,377, 556)]
@@ -323,35 +323,35 @@ class Thready(QThread):
             lzone = tzone[n]
             x, y = tclick[n]
             if findpic(lzone, r"hxls_resource\picture\recruit\accomplish.png")[1] >= 0.6:
-                self.testsignal.emit("·ÃÄ¼%s£ºÍê³É¡£³¢ÊÔÁìÈ¡¡£"%(n+1))
+                self.testsignal.emit("è®¿å‹Ÿ%sï¼šå®Œæˆã€‚å°è¯•é¢†å–ã€‚"%(n+1))
                 self.receive_recruit(x, y)
             while 1:
                 if findpic(lzone, r"hxls_resource\picture\recruit\new.png")[1] >= 0.6:
-                    self.testsignal.emit("·ÃÄ¼%s£º¿ÕÏĞ¡£³¢ÊÔ¿ªÊ¼·ÃÄ¼¡£"%(n+1))
+                    self.testsignal.emit("è®¿å‹Ÿ%sï¼šç©ºé—²ã€‚å°è¯•å¼€å§‹è®¿å‹Ÿã€‚"%(n+1))
                     click(x, y)
                     wait(1000)
                     if findcolor((480, 253,499, 273), "2F2C30")[0]:
-                        self.testsignal.emit("ÆÕÍ¨·ÃÄ¼¡£")
+                        self.testsignal.emit("æ™®é€šè®¿å‹Ÿã€‚")
                         vflag = self.create_recruit()
                         if (not cflag) or (not vflag):break
                         else:
-                            self.testsignal.emit("³¢ÊÔÊ¹ÓÃ¸ßËÙÏÔÓ°¼Á¡£")
+                            self.testsignal.emit("å°è¯•ä½¿ç”¨é«˜é€Ÿæ˜¾å½±å‰‚ã€‚")
                             click(743, 811)
                             wait(1000)
                             if findpic((903, 70, 1021, 141), r"hxls_resource\picture\recruit\lack.png")[1]>=0.6:
-                                self.testsignal.emit("È±ÉÙ¸ßËÙÏÔÓ°¼Á¡£")
+                                self.testsignal.emit("ç¼ºå°‘é«˜é€Ÿæ˜¾å½±å‰‚ã€‚")
                                 cflag = False
                             else:
-                                self.testsignal.emit("¸ßËÙÏÔÓ°¼ÁÊ¹ÓÃ³É¹¦¡£")
+                                self.testsignal.emit("é«˜é€Ÿæ˜¾å½±å‰‚ä½¿ç”¨æˆåŠŸã€‚")
                                 self.receive_recruit(x, y)
                     else:
                         if findcolor((480, 253,499, 273), "B43E8A")[0]:
-                            self.testsignal.emit("·¢ÏÖ±Ø³öSR·ÃÄ¼¡£")
+                            self.testsignal.emit("å‘ç°å¿…å‡ºSRè®¿å‹Ÿã€‚")
                         else:
-                            self.testsignal.emit("·¢ÏÖ±Ø³öSSR·ÃÄ¼£¡")
+                            self.testsignal.emit("å‘ç°å¿…å‡ºSSRè®¿å‹Ÿï¼")
                         break
                 else:
-                    self.testsignal.emit("·ÃÄ¼%s£º½øĞĞÖĞ¡£"%(n+1))
+                    self.testsignal.emit("è®¿å‹Ÿ%sï¼šè¿›è¡Œä¸­ã€‚"%(n+1))
                     break
             if not vflag: break
     def create_recruit(self):
@@ -361,29 +361,29 @@ class Thready(QThread):
         click(871, 818)
         wait(800)
         if findpic((903, 70, 1021, 141), r"hxls_resource\picture\recruit\lack.png")[1]>=0.6:
-            self.testsignal.emit("È±ÉÙ¸ñ»òÍâÏÔ¼ÇÂ¼¡£")
+            self.testsignal.emit("ç¼ºå°‘æ ¼æˆ–å¤–æ˜¾è®°å½•ã€‚")
             return False
         else:
-            self.testsignal.emit("ÉáÓÑ·ÃÄ¼¿ªÊ¼¡£")
+            self.testsignal.emit("èˆå‹è®¿å‹Ÿå¼€å§‹ã€‚")
             return True
     def receive_recruit(self,x,y):
         click(x, y)
         wait(2000)
         if findpic((252, 444, 421, 553), r"hxls_resource\picture\recruit\N.png")[1] >= 0.6:
-            self.testsignal.emit("·ÃÄ¼µ½N¿¨¡£")
+            self.testsignal.emit("è®¿å‹Ÿåˆ°Nå¡ã€‚")
         elif findpic((252, 444, 421, 553), r"hxls_resource\picture\recruit\R.png")[1] >= 0.6:
-            self.testsignal.emit("·ÃÄ¼µ½R¿¨¡£")
+            self.testsignal.emit("è®¿å‹Ÿåˆ°Rå¡ã€‚")
         else:
             path = screenshot()
-            nowtime = time.strftime("%Y-%m-%d %H£º%M£º%S", time.localtime())
+            nowtime = time.strftime("%Y-%m-%d %Hï¼š%Mï¼š%S", time.localtime())
             shutil.copyfile(path, "hxls_resource\screenshot\\" + nowtime + ".png")
             os.remove(path)
             if findpic((252, 444, 421, 553), r"hxls_resource\picture\recruit\SR.png")[1] >= 0.6:
-                self.testsignal.emit("·ÃÄ¼µ½SR¿¨,¿ÉÔÚÎÄ¼ş¼Ğ¡°hxls_resource\screenshot¡±ÖĞ²é¿´¡£")
+                self.testsignal.emit("è®¿å‹Ÿåˆ°SRå¡,å¯åœ¨æ–‡ä»¶å¤¹â€œhxls_resource\screenshotâ€ä¸­æŸ¥çœ‹ã€‚")
             elif findpic((252, 444, 421, 553), r"hxls_resource\picture\recruit\SSR.png")[1] >= 0.6:
-                self.testsignal.emit("·ÃÄ¼µ½SSR¿¨£¡¿ÉÔÚÎÄ¼ş¼Ğ¡°hxls_resource\screenshot¡±ÖĞ²é¿´¡£")
+                self.testsignal.emit("è®¿å‹Ÿåˆ°SSRå¡ï¼å¯åœ¨æ–‡ä»¶å¤¹â€œhxls_resource\screenshotâ€ä¸­æŸ¥çœ‹ã€‚")
             else:
-                self.testsignal.emit("error:ÉáÓÑ·ÃÄ¼Î´Öª´íÎó¡£")
+                self.testsignal.emit("error:èˆå‹è®¿å‹ŸæœªçŸ¥é”™è¯¯ã€‚")
                 self.accomplish.emit(3)
         click(273, 903)
         wait(1500)
@@ -391,9 +391,9 @@ class Thready(QThread):
         wait(1500)
 
     def reward(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é£º½ñÈÕ¹¤×÷¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥ï¼šä»Šæ—¥å·¥ä½œã€‚")
         if not findcolor((181,474,236,528), "2000FF")[0]:
-            self.testsignal.emit("ÔİÎŞÈÎÎñ½±Àø¡£")
+            self.testsignal.emit("æš‚æ— ä»»åŠ¡å¥–åŠ±ã€‚")
             wait(500)
         else:
             click(159, 490)
@@ -405,13 +405,13 @@ class Thready(QThread):
                 wait(2000)
                 click(941, 827)
                 wait(2000)
-                self.testsignal.emit("ÁìÈ¡ÈÎÎñ½±ÀøÍê³É¡£")
-            else:self.testsignal.emit("ÔİÎŞÈÎÎñ½±Àø¡£")
+                self.testsignal.emit("é¢†å–ä»»åŠ¡å¥–åŠ±å®Œæˆã€‚")
+            else:self.testsignal.emit("æš‚æ— ä»»åŠ¡å¥–åŠ±ã€‚")
             click(296, 75)
             wait(1000)
 
     def random_gift(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é£ºËæ»úÀñ°ü¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥ï¼šéšæœºç¤¼åŒ…ã€‚")
         click(144,686)
         wait(2000)
         click(720,301)
@@ -420,12 +420,12 @@ class Thready(QThread):
         dirlist =os.listdir(gdirpath)
         for g in dirlist:
             try:gname = self.indexdir[g]
-            except:gname = "Î´ÖªÀñ°ü"
+            except:gname = "æœªçŸ¥ç¤¼åŒ…"
             gpath = gdirpath+"\\"+g
             while 1:
                 (x,y),val = findpic((820,111, 1840,501), gpath)
                 if val >= 0.8:
-                    self.testsignal.emit("Ê¹ÓÃËæ»úÀñ°ü£º"+gname)
+                    self.testsignal.emit("ä½¿ç”¨éšæœºç¤¼åŒ…ï¼š"+gname)
                     click(x, y)
                     wait(1000)
                     click(956, 867)
@@ -433,11 +433,11 @@ class Thready(QThread):
                     click(956, 867)
                     wait(800)
                 else:
-                    self.testsignal.emit("ÔİÎŞËæ»úÀñ°ü£º¡£"+gname)
+                    self.testsignal.emit("æš‚æ— éšæœºç¤¼åŒ…ï¼šã€‚"+gname)
                     break
 
     def getmail(self):
-        self.testsignal.emit("¿ªÊ¼¼ì²é£ºÓÊ¼ş¡£")
+        self.testsignal.emit("å¼€å§‹æ£€æŸ¥ï¼šé‚®ä»¶ã€‚")
         res,(cx,cy) = findcolor((472, 26, 521, 80), "2000FF", 5)
         if res:
             wait(500)
@@ -448,10 +448,10 @@ class Thready(QThread):
             click(1006, 885)
             wait(2000)
             click(1791, 122)
-            self.testsignal.emit("ÁìÈ¡ÓÊ¼şÍê³É¡£")
+            self.testsignal.emit("é¢†å–é‚®ä»¶å®Œæˆã€‚")
             wait(2000)
         else:
-            self.testsignal.emit("ÔİÎŞĞÂÓÊ¼ş¡£")
+            self.testsignal.emit("æš‚æ— æ–°é‚®ä»¶ã€‚")
             wait(500)
 if __name__ == '__main__':pass
 

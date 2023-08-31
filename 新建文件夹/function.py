@@ -42,7 +42,7 @@ class imitate:
                 self.hwnd = win32gui.FindWindow(self.hclas, self.name)
                 if self.hwnd != 0:break
                 elif i == 14:
-                    print("error:Á¬½Ó³¬Ê±¡£(30s)")
+                    print("error:è¿æ¥è¶…æ—¶ã€‚(30s)")
                     self.hwnd = 0
                 wait(2000)
 
@@ -54,8 +54,8 @@ class imitate:
             wide = right - left
             high = bottom - top
         else:
-            if self.name != None:print("Î´ÕÒµ½³ÌĞòµÄ´°¿Ú£º" + self.name)
-            print("Ó¦ÓÃÈ«ÆÁÉèÖÃ¡£")
+            if self.name != None:print("æœªæ‰¾åˆ°ç¨‹åºçš„çª—å£ï¼š" + self.name)
+            print("åº”ç”¨å…¨å±è®¾ç½®ã€‚")
             hDC = win32gui.GetDC(0)
             wide = win32print.GetDeviceCaps(hDC, win32con.DESKTOPHORZRES)
             high = win32print.GetDeviceCaps(hDC, win32con.DESKTOPVERTRES)
@@ -71,7 +71,7 @@ class imitate:
         if self.hwnd != 0:
             if (wide/high == 1920/1080) and (wide<=3840)and (wide>=1600):zoom=wide/1920
             else:
-                print("²»ÊÊÅäµÄ·Ö±æÂÊ" + str(wide) + "¡Á" + str(high))
+                print("ä¸é€‚é…çš„åˆ†è¾¨ç‡" + str(wide) + "Ã—" + str(high))
                 sys.exit()
         else:zoom = 1.0
         print ((wide, high), zoom)
@@ -130,7 +130,7 @@ class imitate:
         for i in range(num):
             win32api.mouse_event(0x01000, 0, 0, -120*u, 0)
             wait(10)
-    def rotate(self, rx, ry):#3600=360¶È
+    def rotate(self, rx, ry):#3600=360åº¦
         #abs(int(rx/3600*3706* self.scal)), abs(int(ry/3600*3706 * self.scal))
         numx, numy = rx, ry
         if rx < 0:ix = -1
@@ -146,7 +146,7 @@ class imitate:
     def screenshot(self):
         win32api.SetCursorPos((0,0))
         wait(10)
-        sc = ImageGrab.grab(self.frame)  # ½ØÈ¡ÆÁÄ»Ö¸¶¨ÇøÓòµÄÍ¼Ïñ
+        sc = ImageGrab.grab(self.frame)  # æˆªå–å±å¹•æŒ‡å®šåŒºåŸŸçš„å›¾åƒ
         scpic = "cache\\" + str(time.time())[-5:] + ".png"
         sc.save(scpic)
         return scpic
@@ -319,10 +319,10 @@ def keyup(key):#
 def keyadd(key1,key2):
     key_num1 = key_map[key1.upper ()]
     key_num2 = key_map[key2.upper ()]
-    win32api.keybd_event(key_num1, 0, 0, 0)  # ctrl°´ÏÂ
-    win32api.keybd_event(key_num2, 0, 0, 0)  # a°´ÏÂ
-    win32api.keybd_event(key_num2, 0, 0, 0)  # aÌ§Æğ
-    win32api.keybd_event(key_num1, 0, 0, 0)  # ctrlÌ§Æğ
+    win32api.keybd_event(key_num1, 0, 0, 0)  # ctrlæŒ‰ä¸‹
+    win32api.keybd_event(key_num2, 0, 0, 0)  # aæŒ‰ä¸‹
+    win32api.keybd_event(key_num2, 0, 0, 0)  # aæŠ¬èµ·
+    win32api.keybd_event(key_num1, 0, 0, 0)  # ctrlæŠ¬èµ·
 def wait(t):
     time.sleep(t/1000)
 def start(time,path):
@@ -330,12 +330,12 @@ def start(time,path):
         os.system("start \"\" \""+path+"\" -popupwindow")
         wait(time)
     else:
-        print("Éè¶¨µÄÂ·¾¶²»ÕıÈ·£º"+path)
+        print("è®¾å®šçš„è·¯å¾„ä¸æ­£ç¡®ï¼š"+path)
         sys.exit()
 
 def killgame(path):
     os.system("taskkill /f /t /im "+os.path.split(path)[-1])
-    print("ÒÑÍË³ö:"+path)
+    print("å·²é€€å‡º:"+path)
 # imi=imitate()
 # for fun in dir(imitate)[26:]:
 #     globals()[fun] = eval("imi." + fun)

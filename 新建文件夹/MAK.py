@@ -22,32 +22,32 @@ class Ui_main_window(object):
         self.cg_name = ""
         self.uizoom = uizoom
     def setupUi(self, main_window):
-        # ³õÊ¼»¯Ò³Ãæ
+        # åˆå§‹åŒ–é¡µé¢
         self.set_home()
-        # ÔØÈëÉèÖÃĞÅÏ¢
+        # è½½å…¥è®¾ç½®ä¿¡æ¯
         with open(r"hxls_resource\config0.json", 'r', encoding='utf-8') as m:
             self.config0 = json.load(m)
-        with open("hxls_resource\config\\" + self.config0["ÅäÖÃÎÄ¼ş"] + ".json", 'r', encoding='utf-8') as s:
+        with open("hxls_resource\config\\" + self.config0["é…ç½®æ–‡ä»¶"] + ".json", 'r', encoding='utf-8') as s:
             self.configdir = json.load(s)
         with open("hxls_resource\index.json", 'r', encoding='utf-8') as d:
             self.indexdir = json.load(d)
-        #Ö÷½çÃæ¶àÑ¡°´Å¥ºÍÉèÖÃ°´Å¥³õÊ¼»¯
+        #ä¸»ç•Œé¢å¤šé€‰æŒ‰é’®å’Œè®¾ç½®æŒ‰é’®åˆå§‹åŒ–
         self.choose_add_set_add_page()
-        # ÅäÖÃÏîÄ¿°´Å¥³õÊ¼»¯
+        # é…ç½®é¡¹ç›®æŒ‰é’®åˆå§‹åŒ–
         self.config_set()
-        #¸÷ÉèÖÃÒ³Ãæ°´Å¥³õÊ¼»¯
+        #å„è®¾ç½®é¡µé¢æŒ‰é’®åˆå§‹åŒ–
         self.start_program()
         self.fight_program()
         self.dispatch_program()
         self.review_program()
         self.recruit_program()
         self.othor_page()
-        # ÉèÖÃ°´Å¥
+        # è®¾ç½®æŒ‰é’®
         self.load_config0()
-        self.load_config(self.config0["ÅäÖÃÎÄ¼ş"])
-        #Á¬½Óº¯Êı
+        self.load_config(self.config0["é…ç½®æ–‡ä»¶"])
+        #è¿æ¥å‡½æ•°
         self.set_button_connect()
-        #¶¨Ê±ÔËĞĞ
+        #å®šæ—¶è¿è¡Œ
         self.wait_key = Thread(target=self.wait_to_kill, daemon=True)
         self.wait_key.start()
         self.wait_time = Thread(target=self.wait_to_time, daemon=True)
@@ -55,49 +55,49 @@ class Ui_main_window(object):
     def ui_zoom(self,x,y,w,h):
         x,y,w,h =int(self.uizoom*x),int(self.uizoom*y),int(self.uizoom*w),int(self.uizoom*h)
         return QtCore.QRect(x,y,w,h)
-    #³õÊ¼»¯Ö÷Ò³
+    #åˆå§‹åŒ–ä¸»é¡µ
     def set_home(self):
-        #´°¿Ú³õÊ¼»¯
+        #çª—å£åˆå§‹åŒ–
         main_window.setObjectName("main_window")
         main_window.resize(int(self.uizoom*700), int(self.uizoom*340))
         self._translate = QtCore.QCoreApplication.translate
-        main_window.setWindowTitle(self._translate("main_window", "Ô´¿âÖúÀí"))
+        main_window.setWindowTitle(self._translate("main_window", "æºåº“åŠ©ç†"))
         main_window.setWindowIcon(QtGui.QIcon(":/icon/MAK.ico"))
         main_window.setWindowFlags(QtCore.Qt.WindowMinimizeButtonHint |
                                    QtCore.Qt.WindowCloseButtonHint)
         main_window.setFixedSize(main_window.width(), main_window.height())
-        # ÏÔÊ¾Í¼±ê
+        # æ˜¾ç¤ºå›¾æ ‡
         self.ico = QtWidgets.QLabel(main_window)
         self.ico.setGeometry(self.ui_zoom(290, 215, 120, 120))
         self.pixmap = QtGui.QPixmap(r"hxls_resource\ui\mobius.png")
         self.ico.setPixmap(self.pixmap)
         self.ico.setScaledContents(True)
-        #ÔËĞĞÅĞ¶¨
+        #è¿è¡Œåˆ¤å®š
         self.run_judge = QtWidgets.QCheckBox(main_window)
         self.run_judge.setGeometry(self.ui_zoom(0, 0, 110, 16))
         self.run_judge.setObjectName("run_judge")
         self.run_judge.setChecked(False)
         self.run_judge.stateChanged.connect(self.run)
         self.run_judge.hide()
-        # ÎÄ±¾Êä³ö¿ò
+        # æ–‡æœ¬è¾“å‡ºæ¡†
         self.output_string = QtWidgets.QTextBrowser(main_window)
         self.output_string.setGeometry(self.ui_zoom(430, 10, 256, 320))
         self.output_string.setObjectName("output_string")
-        self.sendhelp("Ê¹ÓÃĞëÖª")
+        self.sendhelp("ä½¿ç”¨é¡»çŸ¥")
         self.output_string.moveCursor(self.output_string.textCursor().Start)
         # self.output_string.clear()
-    # Ö÷½çÃæ¶àÑ¡°´Å¥ºÍÉèÖÃ°´Å¥ºÍ×ÓÒ³Ãæ³õÊ¼»¯
+    # ä¸»ç•Œé¢å¤šé€‰æŒ‰é’®å’Œè®¾ç½®æŒ‰é’®å’Œå­é¡µé¢åˆå§‹åŒ–
     def choose_add_set_add_page(self):
-        # ±êÇ©Label
+        # æ ‡ç­¾Label
         self.choose = QtWidgets.QLabel(main_window)
         self.choose.setGeometry(self.ui_zoom(20, 10, 54, 16))
         self.choose.setObjectName("choose")
-        self.choose.setText(self._translate("main_window", "ÔËĞĞÑ¡Ïî"))
+        self.choose.setText(self._translate("main_window", "è¿è¡Œé€‰é¡¹"))
         self.set = QtWidgets.QLabel(main_window)
         self.set.setGeometry(self.ui_zoom(135, 10, 31, 16))
         self.set.setObjectName("set")
-        self.set.setText(self._translate("main_window", "ÉèÖÃ"))
-        # ¶àÑ¡°´Å¥³õÊ¼»¯
+        self.set.setText(self._translate("main_window", "è®¾ç½®"))
+        # å¤šé€‰æŒ‰é’®åˆå§‹åŒ–
         self.choose_create = QtWidgets.QCheckBox(main_window)
         self.choose_create.setEnabled(False)
         self.choose_fight = QtWidgets.QCheckBox(main_window)
@@ -108,7 +108,7 @@ class Ui_main_window(object):
         self.choose_reward = QtWidgets.QCheckBox(main_window)
         self.choose_random_gift = QtWidgets.QCheckBox(main_window)
         self.choose_kill_game = QtWidgets.QCheckBox(main_window)
-        # ÉèÖÃÒ³ÃæÑ¡Ôñ°´Å¥³õÊ¼»¯
+        # è®¾ç½®é¡µé¢é€‰æ‹©æŒ‰é’®åˆå§‹åŒ–
         self.set_create = QtWidgets.QPushButton(main_window)
         self.set_fight = QtWidgets.QPushButton(main_window)
         self.set_dispatch = QtWidgets.QPushButton(main_window)
@@ -118,12 +118,12 @@ class Ui_main_window(object):
         self.set_reward = QtWidgets.QPushButton(main_window)
         self.set_random_gift = QtWidgets.QPushButton(main_window)
         self.set_kill_game = QtWidgets.QPushButton(main_window)
-        # ½¨Á¢×Ó½çÃæ
-        # ¶Ñµş½çÃæ³õÊ¼»¯
+        # å»ºç«‹å­ç•Œé¢
+        # å †å ç•Œé¢åˆå§‹åŒ–
         self.set_pages = QtWidgets.QStackedWidget(main_window)
         self.set_pages.setGeometry(self.ui_zoom(175, 0, 250, 210))
         self.set_pages.setObjectName("set_pages")
-        # ×Ó½çÃæ³õÊ¼»¯
+        # å­ç•Œé¢åˆå§‹åŒ–
         self.create_page = QtWidgets.QWidget()
         self.fight_page = QtWidgets.QWidget()
         self.dispatch_page = QtWidgets.QWidget()
@@ -133,7 +133,7 @@ class Ui_main_window(object):
         self.reward_page = QtWidgets.QWidget()
         self.random_gift_page = QtWidgets.QWidget()
         self.kill_game_page = QtWidgets.QWidget()
-        trans_list = self.indexdir["¹¦ÄÜ"]
+        trans_list = self.indexdir["åŠŸèƒ½"]
         for num in range(len(trans_list)):
             tname = trans_list[num]
             fnamep = self.indexdir[tname]
@@ -146,99 +146,99 @@ class Ui_main_window(object):
             fs.setObjectName(strs)
             fp.setObjectName(strp)
             self.set_pages.addWidget(fp)
-    # ÉèÖÃ°´Å¥¹ØÁªÉèÖÃÒ³Ãæ
+    # è®¾ç½®æŒ‰é’®å…³è”è®¾ç½®é¡µé¢
     def set_button_connect(self):
-        # ÉèÖÃ°´Å¥¹ØÁªÉèÖÃÒ³Ãæ
+        # è®¾ç½®æŒ‰é’®å…³è”è®¾ç½®é¡µé¢
         self.set_pages.setCurrentIndex(0)
-        for i in self.indexdir["¹¦ÄÜ"]:
-            for u in self.indexdir["¹¦ÄÜ"]:
+        for i in self.indexdir["åŠŸèƒ½"]:
+            for u in self.indexdir["åŠŸèƒ½"]:
                 f1, f2 = eval("self.set_" + self.indexdir[i]), eval("self." + self.indexdir[u] + "_page")
                 if i == u:
                     f1.clicked.connect(f2.show)
                 else:
                     f1.clicked.connect(f2.hide)
-        # °ïÖú°´Å¥·¢ËÍ°ïÖúÎÄ±¾
-        self.helpconfig.clicked.connect(lambda: self.sendhelp("ÅäÖÃÇĞ»»ÉèÖÃ°ïÖú"))
-        self.help0.clicked.connect(lambda: self.sendhelp("Ê¹ÓÃĞëÖª"))
-        self.help1.clicked.connect(lambda: self.sendhelp("Æô¶¯ÉèÖÃ°ïÖú"))
-        self.help2.clicked.connect(lambda: self.sendhelp("×÷Õ½/ÖØÓÎÉèÖÃ°ïÖú"))
-        self.help3.clicked.connect(lambda: self.sendhelp("ÏßÏÂ²É¹ºÉèÖÃ°ïÖú"))
-        self.help4.clicked.connect(lambda: self.sendhelp("Õ½Êõ»Ø¹ËÉèÖÃ°ïÖú"))
-        self.help5.clicked.connect(lambda: self.sendhelp("¼¯ÊĞÁìÈ¡ÉèÖÃ°ïÖú"))
-        self.help6.clicked.connect(lambda: self.sendhelp("ÉáÓÑ·ÃÄ¼ÉèÖÃ°ïÖú"))
-        self.help7.clicked.connect(lambda: self.sendhelp("½ñÈÕ¹¤×÷ÉèÖÃ°ïÖú"))
-        self.help8.clicked.connect(lambda: self.sendhelp("Ê¹ÓÃËæ»ú°üÉèÖÃ°ïÖú"))
-        self.help9.clicked.connect(lambda: self.sendhelp("¹Ø±ÕÓÎÏ·ÉèÖÃ°ïÖú"))
-        # Á¬½Ó¿ªÊ¼Í£Ö¹
-        self.start.clicked.connect(lambda: self.run_judge.setChecked(True))  # ¿ªÊ¼°´Å¥Á¬½Ó¿ªÊ¼¹¦ÄÜ
-        self.stop.clicked.connect(lambda: self.pause(2))  # Í£Ö¹°´Å¥Á¬½Ó¹¦ÄÜÖÕÖ¹
-        # Á¬½ÓÅäÖÃÏîÄ¿ÉèÖÃ°´Å¥
-        self.save.clicked.connect(self.save_config)  # ±£´æ°´Å¥Á¬½Ó±£´æÉèÖÃº¯Êı
+        # å¸®åŠ©æŒ‰é’®å‘é€å¸®åŠ©æ–‡æœ¬
+        self.helpconfig.clicked.connect(lambda: self.sendhelp("é…ç½®åˆ‡æ¢è®¾ç½®å¸®åŠ©"))
+        self.help0.clicked.connect(lambda: self.sendhelp("ä½¿ç”¨é¡»çŸ¥"))
+        self.help1.clicked.connect(lambda: self.sendhelp("å¯åŠ¨è®¾ç½®å¸®åŠ©"))
+        self.help2.clicked.connect(lambda: self.sendhelp("ä½œæˆ˜/é‡æ¸¸è®¾ç½®å¸®åŠ©"))
+        self.help3.clicked.connect(lambda: self.sendhelp("çº¿ä¸‹é‡‡è´­è®¾ç½®å¸®åŠ©"))
+        self.help4.clicked.connect(lambda: self.sendhelp("æˆ˜æœ¯å›é¡¾è®¾ç½®å¸®åŠ©"))
+        self.help5.clicked.connect(lambda: self.sendhelp("é›†å¸‚é¢†å–è®¾ç½®å¸®åŠ©"))
+        self.help6.clicked.connect(lambda: self.sendhelp("èˆå‹è®¿å‹Ÿè®¾ç½®å¸®åŠ©"))
+        self.help7.clicked.connect(lambda: self.sendhelp("ä»Šæ—¥å·¥ä½œè®¾ç½®å¸®åŠ©"))
+        self.help8.clicked.connect(lambda: self.sendhelp("ä½¿ç”¨éšæœºåŒ…è®¾ç½®å¸®åŠ©"))
+        self.help9.clicked.connect(lambda: self.sendhelp("å…³é—­æ¸¸æˆè®¾ç½®å¸®åŠ©"))
+        # è¿æ¥å¼€å§‹åœæ­¢
+        self.start.clicked.connect(lambda: self.run_judge.setChecked(True))  # å¼€å§‹æŒ‰é’®è¿æ¥å¼€å§‹åŠŸèƒ½
+        self.stop.clicked.connect(lambda: self.pause(2))  # åœæ­¢æŒ‰é’®è¿æ¥åŠŸèƒ½ç»ˆæ­¢
+        # è¿æ¥é…ç½®é¡¹ç›®è®¾ç½®æŒ‰é’®
+        self.save.clicked.connect(self.save_config)  # ä¿å­˜æŒ‰é’®è¿æ¥ä¿å­˜è®¾ç½®å‡½æ•°
         self.change_config.currentIndexChanged.connect(
-            lambda: self.load_config(self.change_config.currentText()))  # ÇĞ»»±êÇ©Ê±×Ô¶¯ÇĞ»»ÅäÖÃ
-        self.new_config.clicked.connect(self.create_new_config)  # ĞÂ½¨ÅäÖÃÑ¡Ïî
-        self.config_rename.clicked.connect(self.config_rename_fun)  # ÖØÃüÃûÅäÖÃÏîÄ¿
-        self.config_rename_bfinish.clicked.connect(self.config_rename_finish)  # È·ÈÏÖØÃüÃûÅäÖÃÏîÄ¿
+            lambda: self.load_config(self.change_config.currentText()))  # åˆ‡æ¢æ ‡ç­¾æ—¶è‡ªåŠ¨åˆ‡æ¢é…ç½®
+        self.new_config.clicked.connect(self.create_new_config)  # æ–°å»ºé…ç½®é€‰é¡¹
+        self.config_rename.clicked.connect(self.config_rename_fun)  # é‡å‘½åé…ç½®é¡¹ç›®
+        self.config_rename_bfinish.clicked.connect(self.config_rename_finish)  # ç¡®è®¤é‡å‘½åé…ç½®é¡¹ç›®
         QtCore.QMetaObject.connectSlotsByName(main_window)
-    # ÅäÖÃÏîÄ¿°´Å¥³õÊ¼»¯
+    # é…ç½®é¡¹ç›®æŒ‰é’®åˆå§‹åŒ–
     def config_set(self):
         self.helpconfig = QtWidgets.QPushButton(main_window)
         self.helpconfig.setGeometry(self.ui_zoom(240, 215, 40, 23))
         self.helpconfig.setObjectName("helpconfig")
-        self.helpconfig.setText(self._translate("main_window", "°ïÖú"))
-        # Í£Ö¹°´Å¥
+        self.helpconfig.setText(self._translate("main_window", "å¸®åŠ©"))
+        # åœæ­¢æŒ‰é’®
         self.stop = QtWidgets.QPushButton(main_window)
         self.stop.setGeometry(self.ui_zoom(20, 305, 65, 23))
         self.stop.setObjectName("stop")
-        self.stop.setText(self._translate("main_window", "Í£Ö¹"))
-        # ¿ªÊ¼°´Å¥
+        self.stop.setText(self._translate("main_window", "åœæ­¢"))
+        # å¼€å§‹æŒ‰é’®
         self.start = QtWidgets.QPushButton(main_window)
         self.start.setGeometry(self.ui_zoom(20,305, 90, 23))
         self.start.setObjectName("start")
-        self.start.setText(self._translate("main_window", "Æô¶¯"))
-        #ÅäÖÃÏîÄ¿±êÇ©
+        self.start.setText(self._translate("main_window", "å¯åŠ¨"))
+        #é…ç½®é¡¹ç›®æ ‡ç­¾
         self.change_config_Label = QtWidgets.QLabel(main_window)
         self.change_config_Label.setGeometry(self.ui_zoom(170, 215, 60, 23))
         self.change_config_Label.setObjectName("change_config_Label")
-        self.change_config_Label.setText(self._translate("main_window", "ÇĞ»»ÅäÖÃ"))
-        #ÅäÖÃÇĞ»»
+        self.change_config_Label.setText(self._translate("main_window", "åˆ‡æ¢é…ç½®"))
+        #é…ç½®åˆ‡æ¢
         self.change_config = QtWidgets.QComboBox(main_window)
         self.change_config.setGeometry(self.ui_zoom(170, 245, 110, 23))
         self.change_config.setObjectName("change_config")
         self.comboboxstyle(self.change_config)
-        # ±£´æÉèÖÃ°´Å¥
+        # ä¿å­˜è®¾ç½®æŒ‰é’®
         self.save = QtWidgets.QPushButton(main_window)
         self.save.setGeometry(self.ui_zoom(170, 305, 40, 23))
         self.save.setObjectName("save")
-        self.save.setText(self._translate("main_window", "±£´æ"))
-        #ĞÂ½¨ÅäÖÃ
+        self.save.setText(self._translate("main_window", "ä¿å­˜"))
+        #æ–°å»ºé…ç½®
         self.new_config = QtWidgets.QPushButton(main_window)
         self.new_config.setGeometry(self.ui_zoom(170, 275, 58, 23))
         self.new_config.setObjectName("new_config")
-        self.new_config.setText(self._translate("main_window", "ĞÂ½¨ÅäÖÃ"))
-        #ÖØÃüÃûÍê³É
+        self.new_config.setText(self._translate("main_window", "æ–°å»ºé…ç½®"))
+        #é‡å‘½åå®Œæˆ
         self.config_rename_bfinish = QtWidgets.QPushButton(main_window)
         self.config_rename_bfinish.setGeometry(self.ui_zoom(233, 275, 48, 23))
         self.config_rename_bfinish.setObjectName("config_rename_bfinish")
-        self.config_rename_bfinish.setText(self._translate("main_window", "È·ÈÏ"))
-        #ÖØÃüÃû
+        self.config_rename_bfinish.setText(self._translate("main_window", "ç¡®è®¤"))
+        #é‡å‘½å
         self.config_rename = QtWidgets.QPushButton(main_window)
         self.config_rename.setGeometry(self.ui_zoom(233, 275, 48, 23))
         self.config_rename.setObjectName("config_rename")
-        self.config_rename.setText(self._translate("main_window", "ÖØÃüÃû"))
-        #Ê¹ÓÃĞëÖª
+        self.config_rename.setText(self._translate("main_window", "é‡å‘½å"))
+        #ä½¿ç”¨é¡»çŸ¥
         self.help0 = QtWidgets.QPushButton(main_window)
         self.help0.setGeometry(self.ui_zoom(220, 305, 60, 23))
         self.help0.setObjectName("help0")
-        self.help0.setText(self._translate("main_window", "Ê¹ÓÃĞëÖª"))
+        self.help0.setText(self._translate("main_window", "ä½¿ç”¨é¡»çŸ¥"))
 
-#×ÓÒ³ÃæÉèÖÃ
-    # ÓÎÏ·Æô¶¯ÉèÖÃÒ³Ãæ
+#å­é¡µé¢è®¾ç½®
+    # æ¸¸æˆå¯åŠ¨è®¾ç½®é¡µé¢
     def start_program(self):
         self.game_path_Label = QtWidgets.QLabel(self.create_page)
         self.game_path_Label.setGeometry(self.ui_zoom(10, 10, 81, 16))
         self.game_path_Label.setObjectName("game_path_Label")
-        self.game_path_Label.setText(self._translate("main_window", "ÓÎÏ·Æô¶¯Â·¾¶"))
+        self.game_path_Label.setText(self._translate("main_window", "æ¸¸æˆå¯åŠ¨è·¯å¾„"))
         self.game_path = QtWidgets.QLineEdit(self.create_page)
         self.game_path.setGeometry(self.ui_zoom(0, 40, 240, 20))
         self.game_path.setObjectName("game_path")
@@ -246,24 +246,24 @@ class Ui_main_window(object):
         self.help1 = QtWidgets.QPushButton(self.create_page)
         self.help1.setGeometry(self.ui_zoom(90, 8, 40, 20))
         self.help1.setObjectName("help1")
-        self.help1.setText(self._translate("main_window", "°ïÖú"))
+        self.help1.setText(self._translate("main_window", "å¸®åŠ©"))
 
         self.week_Label = QtWidgets.QLabel(self.create_page)
         self.week_Label.setGeometry(self.ui_zoom(0, 70, 81, 16))
         self.week_Label.setObjectName("week_Label")
-        self.week_Label.setText(self._translate("main_window", "Ã¿Ìì"))
+        self.week_Label.setText(self._translate("main_window", "æ¯å¤©"))
         self.time_Label = QtWidgets.QLabel(self.create_page)
         self.time_Label.setGeometry(self.ui_zoom(40, 70, 81, 16))
         self.time_Label.setObjectName("time_Label")
-        self.time_Label.setText(self._translate("main_window", "¶¨Ê±Ö´ĞĞ½Å±¾"))
+        self.time_Label.setText(self._translate("main_window", "å®šæ—¶æ‰§è¡Œè„šæœ¬"))
         self.cho_config_Label = QtWidgets.QLabel(self.create_page)
         self.cho_config_Label.setGeometry(self.ui_zoom(150, 70, 81, 16))
         self.cho_config_Label.setObjectName("cho_config_Label")
-        self.cho_config_Label.setText(self._translate("main_window", "ÅäÖÃÎÄ¼ş"))
+        self.cho_config_Label.setText(self._translate("main_window", "é…ç½®æ–‡ä»¶"))
         self.enable_Label = QtWidgets.QLabel(self.create_page)
         self.enable_Label.setGeometry(self.ui_zoom(220, 70, 81, 16))
         self.enable_Label.setObjectName("enable_Label")
-        self.enable_Label.setText(self._translate("main_window", "ÆôÓÃ"))
+        self.enable_Label.setText(self._translate("main_window", "å¯ç”¨"))
         self.daily1 = QtWidgets.QCheckBox(self.create_page)
         self.time1 = QtWidgets.QDateTimeEdit(self.create_page)
         self.cho_config1 = QtWidgets.QComboBox(self.create_page)
@@ -289,20 +289,20 @@ class Ui_main_window(object):
             self.comboboxstyle(fc)
             fe.setGeometry(self.ui_zoom(225, 60 + num * 30, 58, 22))
             fe.setObjectName(stre)
-    # ×÷Õ½/ÖØÓÎÉèÖÃÒ³Ãæ
+    # ä½œæˆ˜/é‡æ¸¸è®¾ç½®é¡µé¢
     def fight_program(self):
         self.help2 = QtWidgets.QPushButton(self.fight_page)
         self.help2.setGeometry(self.ui_zoom(110, 8, 40, 20))
         self.help2.setObjectName("help2")
-        self.help2.setText(self._translate("main_window", "°ïÖú"))
+        self.help2.setText(self._translate("main_window", "å¸®åŠ©"))
         self.retour_Label = QtWidgets.QLabel(self.fight_page)
         self.retour_Label.setGeometry(self.ui_zoom(0, 10, 81, 16))
         self.retour_Label.setObjectName("retour_Label")
-        self.retour_Label.setText(self._translate("main_window", "ÖØÓÎ"))
+        self.retour_Label.setText(self._translate("main_window", "é‡æ¸¸"))
         self.fight_Label = QtWidgets.QLabel(self.fight_page)
         self.fight_Label.setGeometry(self.ui_zoom(45, 10, 81, 16))
         self.fight_Label.setObjectName("fight_Label")
-        self.fight_Label.setText(self._translate("main_window", "²ÄÁÏÑ¡Ôñ"))
+        self.fight_Label.setText(self._translate("main_window", "ææ–™é€‰æ‹©"))
         self.refight = QtWidgets.QCheckBox(self.fight_page)
         self.refight.setGeometry(self.ui_zoom(5, 30, 58, 22))
         self.refight.setObjectName("refight")
@@ -310,20 +310,20 @@ class Ui_main_window(object):
         self.fight_box.setGeometry(self.ui_zoom(40, 30, 60, 22))
         self.fight_box.setObjectName("fight_box")
         self.comboboxstyle(self.fight_box)
-    # ÏßÏÂ²É¹ºÉèÖÃÒ³Ãæ
+    # çº¿ä¸‹é‡‡è´­è®¾ç½®é¡µé¢
     def dispatch_program(self):
         self.material_Label = QtWidgets.QLabel(self.dispatch_page)
         self.material_Label.setGeometry(self.ui_zoom(5, 10, 81, 16))
         self.material_Label.setObjectName("material")
-        self.material_Label.setText(self._translate("main_window", "²ÄÁÏÑ¡Ôñ"))
+        self.material_Label.setText(self._translate("main_window", "ææ–™é€‰æ‹©"))
         self.fund_Label = QtWidgets.QLabel(self.dispatch_page)
         self.fund_Label.setGeometry(self.ui_zoom(75, 10, 81, 16))
         self.fund_Label.setObjectName("fund")
-        self.fund_Label.setText(self._translate("main_window", "×Ê½ğÑ¡Ôñ"))
+        self.fund_Label.setText(self._translate("main_window", "èµ„é‡‘é€‰æ‹©"))
         self.plan_Label = QtWidgets.QLabel(self.dispatch_page)
         self.plan_Label.setGeometry(self.ui_zoom(140, 10, 81, 16))
         self.plan_Label.setObjectName("plan")
-        self.plan_Label.setText(self._translate("main_window", "·½°¸Ñ¡Ôñ"))
+        self.plan_Label.setText(self._translate("main_window", "æ–¹æ¡ˆé€‰æ‹©"))
 
         self.material1 = QtWidgets.QComboBox(self.dispatch_page)
         self.fund1 = QtWidgets.QComboBox(self.dispatch_page)
@@ -347,7 +347,7 @@ class Ui_main_window(object):
         self.help3 = QtWidgets.QPushButton(self.dispatch_page)
         self.help3.setGeometry(self.ui_zoom(190, 8, 40, 20))
         self.help3.setObjectName("help3")
-        self.help3.setText(self._translate("main_window", "°ïÖú"))
+        self.help3.setText(self._translate("main_window", "å¸®åŠ©"))
 
         for num in range(1, 7):
             strm,strd,strp = "material"+str(num),"fund"+str(num),"plan"+str(num)
@@ -362,36 +362,36 @@ class Ui_main_window(object):
             fp.setObjectName(strp)
             self.comboboxstyle(fp)
 
-    # Õ½Êõ»Ø¹ËÉèÖÃÒ³Ãæ
+    # æˆ˜æœ¯å›é¡¾è®¾ç½®é¡µé¢
     def review_program(self):
         self.help4 = QtWidgets.QPushButton(self.review_page)
         self.help4.setGeometry(self.ui_zoom(100, 8, 40, 20))
         self.help4.setObjectName("help4")
-        self.help4.setText(self._translate("main_window", "°ïÖú"))
+        self.help4.setText(self._translate("main_window", "å¸®åŠ©"))
         self.review_Label = QtWidgets.QLabel(self.review_page)
         self.review_Label.setGeometry(self.ui_zoom(10, 10, 80, 16))
         self.review_Label.setObjectName("review_Label")
-        self.review_Label.setText(self._translate("main_window", "Õ½Êõ»Ø¹ËÑ¡Ôñ"))
+        self.review_Label.setText(self._translate("main_window", "æˆ˜æœ¯å›é¡¾é€‰æ‹©"))
 
         self.review0 = QtWidgets.QComboBox(self.review_page)
         self.review0.setGeometry(self.ui_zoom(20, 30, 50, 22))
         self.review0.setObjectName("review0")
         self.comboboxstyle(self.review0)
-    # ÉáÓÑ·ÃÄ¼ÉèÖÃÒ³Ãæ
+    # èˆå‹è®¿å‹Ÿè®¾ç½®é¡µé¢
     def recruit_program(self):
         self.help6 = QtWidgets.QPushButton(self.recruit_page)
         self.help6.setGeometry(self.ui_zoom(120, 8, 40, 20))
         self.help6.setObjectName("help6")
-        self.help6.setText(self._translate("main_window", "°ïÖú"))
+        self.help6.setText(self._translate("main_window", "å¸®åŠ©"))
 
         self.expedite_Label = QtWidgets.QLabel(self.recruit_page)
         self.expedite_Label.setGeometry(self.ui_zoom(0, 10, 81, 16))
         self.expedite_Label.setObjectName("expedite_Label")
-        self.expedite_Label.setText(self._translate("main_window", "¼ÓËÙ"))
+        self.expedite_Label.setText(self._translate("main_window", "åŠ é€Ÿ"))
         self.recruit_Label = QtWidgets.QLabel(self.recruit_page)
         self.recruit_Label.setGeometry(self.ui_zoom(35, 10, 81, 16))
         self.recruit_Label.setObjectName("recruit_Label")
-        self.recruit_Label.setText(self._translate("main_window", "ÕĞÄ¼¼Æ»®"))
+        self.recruit_Label.setText(self._translate("main_window", "æ‹›å‹Ÿè®¡åˆ’"))
 
         self.expedite = QtWidgets.QCheckBox(self.recruit_page)
         self.expedite.setGeometry(self.ui_zoom(5, 30, 58, 22))
@@ -401,7 +401,7 @@ class Ui_main_window(object):
         self.recruit0.setGeometry(self.ui_zoom(30, 30, 60, 22))
         self.recruit0.setObjectName("recruit0")
         self.comboboxstyle(self.recruit0)
-    # ÆäËûÎ´¿ª·ÅÉèÖÃÒ³Ãæ
+    # å…¶ä»–æœªå¼€æ”¾è®¾ç½®é¡µé¢
     def othor_page(self):
         list = ["market","reward","random_gift","kill_game"]
         self.market_Label = QtWidgets.QLabel()
@@ -414,25 +414,25 @@ class Ui_main_window(object):
             fl = QtWidgets.QLabel(fp)
             fl.setGeometry(self.ui_zoom(10, 10, 81, 16))
             fl.setObjectName(strl)
-            fl.setText(self._translate("main_window", "ÔİÎŞÅäÖÃÑ¡Ïî"))
+            fl.setText(self._translate("main_window", "æš‚æ— é…ç½®é€‰é¡¹"))
         self.help5 = QtWidgets.QPushButton(self.market_page)
         self.help5.setGeometry(self.ui_zoom(120, 8, 40, 20))
         self.help5.setObjectName("help5")
-        self.help5.setText(self._translate("main_window", "°ïÖú"))
+        self.help5.setText(self._translate("main_window", "å¸®åŠ©"))
         self.help7 = QtWidgets.QPushButton(self.reward_page)
         self.help7.setGeometry(self.ui_zoom(120, 8, 40, 20))
         self.help7.setObjectName("help7")
-        self.help7.setText(self._translate("main_window", "°ïÖú"))
+        self.help7.setText(self._translate("main_window", "å¸®åŠ©"))
         self.help8 = QtWidgets.QPushButton(self.random_gift_page)
         self.help8.setGeometry(self.ui_zoom(120, 8, 40, 20))
         self.help8.setObjectName("help8")
-        self.help8.setText(self._translate("main_window", "°ïÖú"))
+        self.help8.setText(self._translate("main_window", "å¸®åŠ©"))
         self.help9 = QtWidgets.QPushButton(self.kill_game_page)
         self.help9.setGeometry(self.ui_zoom(120, 8, 40, 20))
         self.help9.setObjectName("help9")
-        self.help9.setText(self._translate("main_window", "°ïÖú"))
-#ÈÎÎñÔËĞĞ
-    # ½Å±¾ÔËĞĞº¯Êı
+        self.help9.setText(self._translate("main_window", "å¸®åŠ©"))
+#ä»»åŠ¡è¿è¡Œ
+    # è„šæœ¬è¿è¡Œå‡½æ•°
     def run(self):
         if not self.run_judge.isChecked():pass
         else:
@@ -447,14 +447,14 @@ class Ui_main_window(object):
                 with open("hxls_resource\config\\" + self.cg_name + ".json", 'r', encoding='utf-8') as r:
                     self.rundir = json.load(r)
                 self.cg_name = ""
-                for name in self.indexdir["¹¦ÄÜ"]: nrun_list += [self.rundir[name]]
+                for name in self.indexdir["åŠŸèƒ½"]: nrun_list += [self.rundir[name]]
                 for num in range(1, 7):
-                    drun_list += [self.rundir["ÏßÏÂ²É¹º" + str(num)]]
-                rv = self.rundir["Õ½Êõ»Ø¹ËÅäÖÃ"]
-                fit = self.rundir["×÷Õ½ÅäÖÃ"]
-                rt = self.rundir["ÉáÓÑ·ÃÄ¼ÅäÖÃ"]
+                    drun_list += [self.rundir["çº¿ä¸‹é‡‡è´­" + str(num)]]
+                rv = self.rundir["æˆ˜æœ¯å›é¡¾é…ç½®"]
+                fit = self.rundir["ä½œæˆ˜é…ç½®"]
+                rt = self.rundir["èˆå‹è®¿å‹Ÿé…ç½®"]
             else:
-                for name in self.indexdir["¹¦ÄÜ"]:
+                for name in self.indexdir["åŠŸèƒ½"]:
                     fc = eval("self.choose_" + self.indexdir[name])
                     nrun_list += [fc.isChecked()]
                 for num in range(1, 7):
@@ -464,19 +464,19 @@ class Ui_main_window(object):
                 rv = self.review0.currentIndex()
                 fit = [self.refight.isChecked(),self.fight_box.currentIndex()]
                 rt = [self.expedite.isChecked(),self.recruit0.currentIndex()]
-            self.tlist = [self.config0["ÓÎÏ·Æô¶¯Â·¾¶"], nrun_list,fit,drun_list,rv,rt]
+            self.tlist = [self.config0["æ¸¸æˆå¯åŠ¨è·¯å¾„"], nrun_list,fit,drun_list,rv,rt]
             self.thready = Thready(self.tlist)
             self.thready.start()
             self.thready.testsignal.connect(self.showtext)
             self.thready.accomplish.connect(self.pause)
-    # °´¼ü´¥·¢ÖÕÖ¹
+    # æŒ‰é”®è§¦å‘ç»ˆæ­¢
     def wait_to_kill(self):
         while 1:
             self.event_run.wait()
             keyboard.wait("ctrl+/")
             if self.event_run.isSet():self.pause(2)
-    # ÈÎÎñÖÕÖ¹
-    def pause(self,num):# 1Õı³£½áÊø 2¼üÅÌÍ£Ö¹,°´Å¥Í£Ö¹ 3±¨´íÍ£Ö¹
+    # ä»»åŠ¡ç»ˆæ­¢
+    def pause(self,num):# 1æ­£å¸¸ç»“æŸ 2é”®ç›˜åœæ­¢,æŒ‰é’®åœæ­¢ 3æŠ¥é”™åœæ­¢
         self.event_run.clear()
         self.event_pause.set()
         self.run_judge.setChecked(False)
@@ -485,7 +485,7 @@ class Ui_main_window(object):
         else:
             self.thready.terminate()
             if num == 2:
-                self.showtext("ÒÑÊÖ¶¯Í£Ö¹¡£\n")
+                self.showtext("å·²æ‰‹åŠ¨åœæ­¢ã€‚\n")
                 # self.pixmap = QtGui.QPixmap(r"hxls_resource\ui\ico\2.png")
             elif num ==3:pass
                 # self.pixmap = QtGui.QPixmap(r"hxls_resource\ui\ico\3.png")
@@ -494,14 +494,14 @@ class Ui_main_window(object):
         self.ico.setPixmap(self.pixmap)
         main_window.activateWindow()
 
-#ÅäÖÃ¹¦ÄÜº¯Êı
-    # ÅäÖÃÖØÃüÃû
+#é…ç½®åŠŸèƒ½å‡½æ•°
+    # é…ç½®é‡å‘½å
     def config_rename_fun(self):
         self.config_rename.hide()
         self.config_rename_bfinish.show()
         self.old = self.change_config.currentText()
         self.change_config.setEditable(True)
-    # ÅäÖÃÖØÃüÃûÍê³É
+    # é…ç½®é‡å‘½åå®Œæˆ
     def config_rename_finish(self):
         newname = self.change_config.currentText()
         os.rename("hxls_resource\config\\" + self.old + ".json",
@@ -509,7 +509,7 @@ class Ui_main_window(object):
         self.change_config.setEditable(False)
         index = self.change_config.currentIndex()
         self.change_config.setItemText(index,newname)
-        self.config0["ÅäÖÃÎÄ¼ş"] = newname
+        self.config0["é…ç½®æ–‡ä»¶"] = newname
         with open(r"hxls_resource\config0.json", 'w', encoding='utf-8') as f:
             json.dump(self.config0, f, ensure_ascii=False,indent=1)
         self.config_rename_bfinish.hide()
@@ -517,18 +517,18 @@ class Ui_main_window(object):
         for num in range(1,4):
             fc=eval("self.cho_config" + str(num))
             fc.setItemText(index,newname)
-    # ĞÂ½¨ÅäÖÃ
+    # æ–°å»ºé…ç½®
     def create_new_config(self):
         random_num = str(random.randint(999,10000))
-        shutil.copyfile("hxls_resource\Ä¬ÈÏÅäÖÃ.json", "hxls_resource\config\Ä¬ÈÏÅäÖÃ" + random_num +".json")
-        self.change_config.addItems(["Ä¬ÈÏÅäÖÃ"+random_num])
-        self.change_config.setCurrentText("Ä¬ÈÏÅäÖÃ"+random_num)
+        shutil.copyfile("hxls_resource\é»˜è®¤é…ç½®.json", "hxls_resource\config\é»˜è®¤é…ç½®" + random_num +".json")
+        self.change_config.addItems(["é»˜è®¤é…ç½®"+random_num])
+        self.change_config.setCurrentText("é»˜è®¤é…ç½®"+random_num)
         for num in range(1,4):
             fc=eval("self.cho_config" + str(num))
-            fc.addItems(["Ä¬ÈÏÅäÖÃ"+random_num])
-    # ¼ÓÔØÖ÷ÅäÖÃ
+            fc.addItems(["é»˜è®¤é…ç½®"+random_num])
+    # åŠ è½½ä¸»é…ç½®
     def load_config0(self):
-        # ¼ÓÔØÖ÷ÉèÖÃ
+        # åŠ è½½ä¸»è®¾ç½®
         filedir = "hxls_resource\config"
         self.filelist = []
         for file in os.listdir(filedir):
@@ -538,69 +538,69 @@ class Ui_main_window(object):
         for num in range(1, 4):
             strw, strt, strc,stre = "daily" + str(num), "time" + str(num), "cho_config" + str(num), "enable" + str(num)
             fw, ft, fc,fe = eval("self." + strw), eval("self." + strt), eval("self." + strc), eval("self." + stre)
-            che,time,config_file,ena=self.config0["Ê±¼ä"+str(num)]
+            che,time,config_file,ena=self.config0["æ—¶é—´"+str(num)]
             ft.setDateTime(datetime.datetime.fromtimestamp(time))
             fw.setChecked(che)
             fc.addItems(self.filelist)
             fc.setCurrentText(config_file)
             fe.setChecked(ena)
-        self.game_path.setText(self.config0["ÓÎÏ·Æô¶¯Â·¾¶"])
+        self.game_path.setText(self.config0["æ¸¸æˆå¯åŠ¨è·¯å¾„"])
         self.game_path.home(False)
-        self.change_config.setCurrentText(self.config0["ÅäÖÃÎÄ¼ş"])
-        # ³õÊ¼»¯×÷Õ½ÉèÖÃ
-        self.fight_box.addItems(self.indexdir["×÷Õ½¹Ø¿¨"])
-        # ³õÊ¼»¯ÅÉÇ²ÉèÖÃ
-        mlist = self.indexdir["ÏßÏÂ²É¹º²ÄÁÏ"]
-        dlist = self.indexdir["Ğ¯´ø×Ê½ğ"]
-        plist = self.indexdir["²É¹º·½°¸"]
+        self.change_config.setCurrentText(self.config0["é…ç½®æ–‡ä»¶"])
+        # åˆå§‹åŒ–ä½œæˆ˜è®¾ç½®
+        self.fight_box.addItems(self.indexdir["ä½œæˆ˜å…³å¡"])
+        # åˆå§‹åŒ–æ´¾é£è®¾ç½®
+        mlist = self.indexdir["çº¿ä¸‹é‡‡è´­ææ–™"]
+        dlist = self.indexdir["æºå¸¦èµ„é‡‘"]
+        plist = self.indexdir["é‡‡è´­æ–¹æ¡ˆ"]
         for num in range(1, 7):
             strm, strd, strp = "material" + str(num), "fund" + str(num), "plan" + str(num)
             fm, fd, fp = eval("self." + strm), eval("self." + strd), eval("self." + strp)
             fm.addItems(mlist)
             fd.addItems(dlist)
             fp.addItems(plist)
-        # ³õÊ¼»¯Õ½Êõ»Ø¹ËÉèÖÃ
-        self.review0.addItems(self.indexdir["Õ½Êõ»Ø¹ËÑ¡Ôñ"])
-        # ³õÊ¼»¯ÉáÓÑ·ÃÄ¼ÉèÖÃ
-        numlist = ["0¸ñ", "100¸ñ", "200¸ñ", "300¸ñ", "400¸ñ", "500¸ñ","600¸ñ", "700¸ñ"]
+        # åˆå§‹åŒ–æˆ˜æœ¯å›é¡¾è®¾ç½®
+        self.review0.addItems(self.indexdir["æˆ˜æœ¯å›é¡¾é€‰æ‹©"])
+        # åˆå§‹åŒ–èˆå‹è®¿å‹Ÿè®¾ç½®
+        numlist = ["0æ ¼", "100æ ¼", "200æ ¼", "300æ ¼", "400æ ¼", "500æ ¼","600æ ¼", "700æ ¼"]
         self.recruit0.addItems(numlist)
 
-    # ¼ÓÔØ´ÎÅäÖÃ
+    # åŠ è½½æ¬¡é…ç½®
     def load_config(self,file):
         path ="hxls_resource\config\\"+file+".json"
         with open(path, 'r', encoding='utf-8') as config_dir:
             self.configdir = json.load(config_dir)
-        #¼ÓÔØ¹¦ÄÜÉèÖÃ
-        trans_list = self.indexdir["¹¦ÄÜ"]
+        #åŠ è½½åŠŸèƒ½è®¾ç½®
+        trans_list = self.indexdir["åŠŸèƒ½"]
         for num in range(len(trans_list)):
             fc = eval("self.choose_" + self.indexdir[trans_list[num]])
             fc.setChecked(self.configdir[trans_list[num]])
-        # ¼ÓÔØ×÷Õ½ÉèÖÃ
-        self.refight.setChecked(self.configdir["×÷Õ½ÅäÖÃ"][0])
-        self.fight_box.setCurrentIndex(self.configdir["×÷Õ½ÅäÖÃ"][1])
-        #¼ÓÔØÅÉÇ²ÉèÖÃ
+        # åŠ è½½ä½œæˆ˜è®¾ç½®
+        self.refight.setChecked(self.configdir["ä½œæˆ˜é…ç½®"][0])
+        self.fight_box.setCurrentIndex(self.configdir["ä½œæˆ˜é…ç½®"][1])
+        #åŠ è½½æ´¾é£è®¾ç½®
         for num in range(1, 7):
             strm, strd,strp = "material" + str(num), "fund" + str(num),"plan" + str(num)
             fm, fd,fp = eval("self." + strm), eval("self." + strd), eval("self." + strp)
-            fm.setCurrentIndex(self.configdir["ÏßÏÂ²É¹º"+ str(num)][0])
-            fd.setCurrentIndex(self.configdir["ÏßÏÂ²É¹º" + str(num)][1])
-            fp.setCurrentIndex(self.configdir["ÏßÏÂ²É¹º" + str(num)][2])
-        # ¼ÓÔØÕ½Êõ»Ø¹ËÉèÖÃ
-        self.review0.setCurrentIndex(self.configdir["Õ½Êõ»Ø¹ËÅäÖÃ"])
-        # ¼ÓÔØÉáÓÑ·ÃÄ¼ÉèÖÃ
-        self.expedite.setChecked(self.configdir["ÉáÓÑ·ÃÄ¼ÅäÖÃ"][0])
-        self.recruit0.setCurrentIndex(self.configdir["ÉáÓÑ·ÃÄ¼ÅäÖÃ"][1])
+            fm.setCurrentIndex(self.configdir["çº¿ä¸‹é‡‡è´­"+ str(num)][0])
+            fd.setCurrentIndex(self.configdir["çº¿ä¸‹é‡‡è´­" + str(num)][1])
+            fp.setCurrentIndex(self.configdir["çº¿ä¸‹é‡‡è´­" + str(num)][2])
+        # åŠ è½½æˆ˜æœ¯å›é¡¾è®¾ç½®
+        self.review0.setCurrentIndex(self.configdir["æˆ˜æœ¯å›é¡¾é…ç½®"])
+        # åŠ è½½èˆå‹è®¿å‹Ÿè®¾ç½®
+        self.expedite.setChecked(self.configdir["èˆå‹è®¿å‹Ÿé…ç½®"][0])
+        self.recruit0.setCurrentIndex(self.configdir["èˆå‹è®¿å‹Ÿé…ç½®"][1])
 
-    # ±£´æÅäÖÃ
+    # ä¿å­˜é…ç½®
     def save_config(self):
-        self.config0["ÓÎÏ·Æô¶¯Â·¾¶"] = self.game_path.text().strip("\"")
-        self.config0["ÅäÖÃÎÄ¼ş"] = self.change_config.currentText()
+        self.config0["æ¸¸æˆå¯åŠ¨è·¯å¾„"] = self.game_path.text().strip("\"")
+        self.config0["é…ç½®æ–‡ä»¶"] = self.change_config.currentText()
         for num in range(1,4):
             strw, strt, strc,stre = "daily" + str(num), "time" + str(num), "cho_config" + str(num), "enable" + str(num)
             fw, ft, fc ,fe= eval("self." + strw), eval("self." + strt), eval("self." + strc), eval("self." + stre)
             timenum = time.mktime(ft.dateTime().toPyDateTime().timetuple())
-            self.config0["Ê±¼ä"+str(num)]=[fw.isChecked(),timenum,fc.currentText(),fe.isChecked()]
-        plist = self.indexdir["¹¦ÄÜ"]
+            self.config0["æ—¶é—´"+str(num)]=[fw.isChecked(),timenum,fc.currentText(),fe.isChecked()]
+        plist = self.indexdir["åŠŸèƒ½"]
         for num in range(len(plist)):
             strc = "choose_" + self.indexdir[plist[num]]
             fc = eval("self."+strc)
@@ -608,23 +608,23 @@ class Ui_main_window(object):
         for num in range(1, 7):
             strm, strd, strp = "material" + str(num), "fund" + str(num), "plan" + str(num)
             fm, fd, fp = eval("self." + strm), eval("self." + strd), eval("self." + strp)
-            self.configdir["ÏßÏÂ²É¹º" + str(num)] = [fm.currentIndex(),fd.currentIndex(),fp.currentIndex()]
-        self.configdir["Õ½Êõ»Ø¹ËÅäÖÃ"] = eval("self.review0").currentIndex()
-        self.configdir["×÷Õ½ÅäÖÃ"] = [self.refight.isChecked() ,self.fight_box.currentIndex()]
-        self.configdir["ÉáÓÑ·ÃÄ¼ÅäÖÃ"] = [self.expedite.isChecked() ,self.recruit0.currentIndex()]
+            self.configdir["çº¿ä¸‹é‡‡è´­" + str(num)] = [fm.currentIndex(),fd.currentIndex(),fp.currentIndex()]
+        self.configdir["æˆ˜æœ¯å›é¡¾é…ç½®"] = eval("self.review0").currentIndex()
+        self.configdir["ä½œæˆ˜é…ç½®"] = [self.refight.isChecked() ,self.fight_box.currentIndex()]
+        self.configdir["èˆå‹è®¿å‹Ÿé…ç½®"] = [self.expedite.isChecked() ,self.recruit0.currentIndex()]
         with open(r"hxls_resource\config0.json", 'w', encoding='utf-8') as f:
             json.dump(self.config0, f, ensure_ascii=False,indent=1)
-        with open("hxls_resource\config\\"+self.config0["ÅäÖÃÎÄ¼ş"]+".json", 'w', encoding='utf-8') as d:
+        with open("hxls_resource\config\\"+self.config0["é…ç½®æ–‡ä»¶"]+".json", 'w', encoding='utf-8') as d:
             json.dump(self.configdir, d, ensure_ascii=False,indent=1)
         # self.pixmap = QtGui.QPixmap(r"hxls_resource\ui\ico\0.png")
         self.ico.setPixmap(self.pixmap)
 
-    #ÉèÖÃÑùÊ½
+    #è®¾ç½®æ ·å¼
     def comboboxstyle(self,f):
         f.setStyleSheet("QAbstractItemView::item {height: 22px;}")
         f.setView(QtWidgets.QListView())
         # font = QtGui.QFont()
-        # font.setPointSize(10)  # ×ÖÌå´óĞ¡
+        # font.setPointSize(10)  # å­—ä½“å¤§å°
         # f.setFont(font)
     def wait_to_time(self):
         while 1:
@@ -642,15 +642,15 @@ class Ui_main_window(object):
                             self.run_judge.setChecked(True)
                             break
             time.sleep(10)
-#Ö¸Ê¾ĞÅÏ¢Êä³ö
-    # Êä³öÖ¸Ê¾ÎÄ±¾£¬²¢¼ÇÂ¼ÎÄ±¾ÀúÊ·
+#æŒ‡ç¤ºä¿¡æ¯è¾“å‡º
+    # è¾“å‡ºæŒ‡ç¤ºæ–‡æœ¬ï¼Œå¹¶è®°å½•æ–‡æœ¬å†å²
     def showtext(self, msg, nowtime=None):
         if nowtime == None: nowtime = time.strftime("%H:%M:%S ", time.localtime())
         self.output_string.append(nowtime + msg)
         self.output_string.ensureCursorVisible()
         txt = open(r'hxls_resource\logging.txt', 'a+', encoding='utf-8')
         txt.write(nowtime + msg + "\n")
-    # Êä³ö°ïÖúĞÅÏ¢
+    # è¾“å‡ºå¸®åŠ©ä¿¡æ¯
     def sendhelp(self,helpstr):
         with open(r"hxls_resource\help.json", 'r', encoding='utf-8') as d:
             self.help_dir = json.load(d)
